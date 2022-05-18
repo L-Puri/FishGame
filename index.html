@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,24 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="canvas1"></div>
+
+<body>  
+
+    <!-- START GAME-->
+    <div id="start-screen">
+        <button id="start-button">StartGame</button> 
+    </div>
+    <!--CANVAS-->
+    <div id="game-board">
+        <canvas id="my-canvas" width="1200" height="800"></canvas>
+    </div>
+    <!-- GAME OVER -->
+    <div id="game-over">
+        <button id="gameOverButton">Restart</button>
+    </div>
 
 
-    <script src="script.js">
-
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
