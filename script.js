@@ -5,6 +5,10 @@ const startScreen = document.querySelector('#start-screen');
 const gameBoard = document.querySelector('#game-board');
 const reStartButton = document.querySelector('#gameOverButton');
 const gameOversScreen = document.querySelector('#game-over');
+const gameWinningScreen = new Image();
+gameWinningScreen.src = "./images/background1.png";
+const body = document.body
+
 
 let score = 0;
 let gameFrame = 0;
@@ -174,6 +178,10 @@ function fishMovement(event) {
     }
 }
 
+function loadWinningScreen() {
+    canvas.classList.add('visibility');
+    body.append(gameWinningScreen);
+}
 
 //Animation Loop
 function animate() {
@@ -183,9 +191,12 @@ function animate() {
     drawBubbles();
     drawJelly();
     drawSmallBubbles();
-    if(score === 100 || gameOver) {
-        cancelAnimationFrame(animationId)
+    if(score === 20 || gameOver) {
+        cancelAnimationFrame(animationId);
+        loadWinningScreen();
     }
+
+
     else {
         animationId = requestAnimationFrame(animate)
     }
