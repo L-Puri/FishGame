@@ -6,8 +6,8 @@ const gameBoard = document.querySelector('#game-board');
 const reStartButton = document.querySelector('#gameOverButton');
 const gameOversScreen = document.querySelector('#game-over');
 
-// let score = 0;
-// let gameFrame = 0;
+let score = 0;
+let gameFrame = 0;
 
 const bgImg = new Image();
 bgImg.src = "./images/background.jpg";
@@ -183,9 +183,10 @@ function animate() {
     drawBubbles();
     drawJelly();
     drawSmallBubbles();
-    if (gameOver) {
-        cancelAnimationFrame(animationId);
-    } else {
+    if(score === 100 || gameOver) {
+        cancelAnimationFrame(animationId)
+    }
+    else {
         animationId = requestAnimationFrame(animate)
     }
 }
@@ -279,8 +280,10 @@ function drawBubbles() {
                     playerX + playerWidth > bubblesArray[i].x &&
                     playerY < bubblesArray[i].y + 40 &&
                     playerHeight + playerY > bubblesArray[i].y) {
-                        console.log('bubbles')
-                    }
+                        score += 1;
+                        console.log(score);
+                    } 
+
     }
 }
 
