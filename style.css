@@ -35,3 +35,54 @@ body button {
 .visibility {
     display: none;
 }
+
+#start-button {
+    background-color: red;
+    width: 200px;
+    height: 50px;
+    font-weight: bold;
+}
+
+
+.main-screen {
+    background-image: url(./images/fish.gif);
+    background-repeat: no-repeat;
+    margin-right: 100px;
+    background-color: rgb(85, 60, 60);
+}
+
+/* 
+#btn-start {
+    border: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  #btn-start {
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 50px;
+     background-color: #1fd1f9;
+  background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+    transition: all 0.3s ease;
+  }
+  #btn-start:hover {
+    background: transparent;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+      inset -4px -4px 6px 0 rgba(255,255,255,.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+    color: #fff;
+  }
+  #btn-start:hover:after {
+    -webkit-transform: scale(2) rotate(180deg);
+    transform: scale(2) rotate(180deg);
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+      inset -4px -4px 6px 0 rgba(255,255,255,.5),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+  }
+   */

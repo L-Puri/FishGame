@@ -191,9 +191,11 @@ function loadWinningScreen() {
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBg();
+    //SCORE TEXT
     ctx.font = '24px Verdana';
     ctx.fillText (`Your Score is: ${score}`, 30, 30);
     ctx.fillStyle = 'white';
+    //ENDS SCORE TEXT
     drawFish();
     drawBubbles();
     drawJelly();
@@ -201,7 +203,7 @@ function animate() {
     //START SCORE
     if(score === 150 || gameOver) {
         cancelAnimationFrame(animationId);
-        // loadWinningScreen();
+        loadWinningScreen();
     }
     //CLOSE SCORE
     else {
