@@ -1,18 +1,21 @@
-//getElemtnt from HTML file
+//getElement from HTML file
 const startButton = document.querySelector('#start-button');
 const canvas = document.querySelector('#my-canvas');
 const startScreen = document.querySelector('#start-screen');
 const gameBoard = document.querySelector('#game-board');
 const reStartButton = document.querySelector('#gameOverButton');
 const gameOversScreen = document.querySelector('#game-over');
+
+//DISPLAY WINNING SCREEN
 const gameWinningScreen = new Image();
-gameWinningScreen.src = "./images/background1.png";
+gameWinningScreen.src = "./images/winner.jpg";
 const body = document.body
 
-
+//SCORE
 let score = 0;
 let gameFrame = 0;
 
+//BACKGROUND IMAGE
 const bgImg = new Image();
 bgImg.src = "./images/background.jpg";
 
@@ -51,10 +54,7 @@ let bubblesArray = [
         x: 1000,
         y: canvas.height + 600
     }
-
-    
 ];
-
 
 
 let jellyArray = [
@@ -128,6 +128,7 @@ function drawBg() {
 }
 // canvas.style.backgroundColor = '#1e81b0';
 
+
 //GLOBAL VARIABLES
 let animationId = 0;
 let gameOver = false;
@@ -178,25 +179,31 @@ function fishMovement(event) {
     }
 }
 
+
+//WINNING SCREEN
 function loadWinningScreen() {
     canvas.classList.add('visibility');
     body.append(gameWinningScreen);
 }
 
+
 //Animation Loop
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBg();
+    ctx.font = '24px Verdana';
+    ctx.fillText (`Your Score is: ${score}`, 30, 30);
+    ctx.fillStyle = 'white';
     drawFish();
     drawBubbles();
     drawJelly();
     drawSmallBubbles();
-    if(score === 20 || gameOver) {
+    //START SCORE
+    if(score === 150 || gameOver) {
         cancelAnimationFrame(animationId);
-        loadWinningScreen();
+        // loadWinningScreen();
     }
-
-
+    //CLOSE SCORE
     else {
         animationId = requestAnimationFrame(animate)
     }
@@ -212,13 +219,11 @@ function startGame() {
 }
 
 
-
 // ADDEVENTLISTENER
 window.addEventListener("load", () => {
     startScreen.style.display = 'block';
     gameBoard.style.display = 'none';
     gameOversScreen.style.display = 'none';
-
     startButton.addEventListener("click", () => {
         startGame();
     })
@@ -270,10 +275,10 @@ window.addEventListener("load", () => {
                 y: canvas.height + 600
             }        
         ];
-
         startGame();
     })
 })
+
 
 document.addEventListener('keydown', fishMovement)
 document.addEventListener('keyup', fishMovement)
@@ -287,26 +292,30 @@ function drawBubbles() {
         if(bubblesArray[i].y < 0) {
             bubblesArray[i].y = canvas.height + 200;
         } 
+        //BUBBLE COLLISION
                 if (playerX < bubblesArray[i].x + 100 &&
                     playerX + playerWidth > bubblesArray[i].x &&
                     playerY < bubblesArray[i].y + 40 &&
                     playerHeight + playerY > bubblesArray[i].y) {
+                        bubblesArray[i].y = canvas.height + 200;
                         score += 1;
                         console.log(score);
                     } 
-
     }
 }
+
 
 //JELLY FISH
 function drawJelly() {
     for (let i = 0; i < jellyArray.length; i += 1) {
-        ctx.drawImage(jellyArray[i].img, jellyArray[i].x, jellyArray[i].y, 100, 100)
-        jellyArray[i].y -= 1.5;
+        ctx.drawImage(jellyArray[i].img, jellyArray[i].x, jellyArray[i].y, 120, 120)
+        jellyArray[i].y -= 2;
         if(jellyArray[i].y < 0) {
             jellyArray[i].y = canvas.height + 300;
         }
-        if (playerX < jellyArray[i].x + 100 &&
+
+        //FISH COLLISION 
+        if (playerX < jellyArray[i].x + 120 &&
                     playerX + playerWidth > jellyArray[i].x &&
                     playerY < jellyArray[i].y + 50 &&
                     playerHeight + playerY > jellyArray[i].y) {
@@ -315,9 +324,7 @@ function drawJelly() {
                     startScreen.style.display = 'none';
                     console.log('collision')
                     gameOver = true;
-                }
-                    
-                    
+                }                
     }
 }
 
@@ -332,81 +339,4 @@ function drawSmallBubbles() {
         }
     }
 }
-
-// const bubblessArray = [];
-// class Bubble {
-//     constructor() {
-//         this.x = Math.random() * canvas.width;
-//         this.y = canvas.height + 100;
-//         this.radius = 50;
-//         this.sppeed = Math.random() * 5 + 1;
-//         this.distance;
-//         this.counted = false;
-//         this.sound = Math.random() <= 0.5 ? 'sound1' : 'sound2';
-//     }
-//     update() {
-//         this.y -= this.sppeed;
-//         const dx = this.x - player.x;
-//         const dy = this.y - player.y;
-//         this.distance = Math.sqrt(dx * dx + dy * dy);
-//     }
-//     draw() {
-//         ctx.fillStyle = 'blue';
-//         ctx.beginPath();
-//         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-//         ctx.fill();
-//         ctx.closePath();
-//         ctx.stroke();
-//     }
-// }
-
-
-
-// function handleBubbles() {
-//     if (gameFrame % 50 == 0) {
-//         bubblessArray.push(new Bubble());
-//     }
-//     for (let i = 0; i < bubblessArray.length; i++) {
-//         bubblessArray[i].update();
-//         bubblessArray[i].draw();
-//     }
-//     for (let i = 0; i < bubblessArray.length; i++) {
-//         if (bubblessArray[i].y < 0 - bubblessArray[i].radius * 2) {
-//             bubblessArray.splice(i, 1);
-//         }
-
-//         if (bubblessArray[i]) {
-//         }
-
-//         if (bubblessArray[i].distance < bubblessArray[i].radius + player.radius) {
-//             if (!bubblessArray[i].counted) {
-//                 if (bubblessArray[i].sound == 'sound1') {
-//                     bubblePop1.play();
-//                 } else {
-//                     bubblePop2.play();
-//                 }
-//                 score++;
-//                 bubblessArray[i].counted = true;
-//                 bubblessArray.splice(i, 1);
-//             }
-//         }
-//     }
-// }
-
-
-//canvas position
-
-
-// const mouse = {
-//     x: canvas.width/2,
-//     y: canvas.height/2,
-//     click: false
-// }
-// canvas.addEventListener('mousedown', function(event) {
-//     mouse.x = event.x - canvasPosition.left;
-//     mouse.y = event.y - canvasPosition.height;
-//     conse.log(mouse.x, mouse.y);
-// });
-
-//Player
 
