@@ -45,7 +45,7 @@ let bubblesArray = [
 
     {
         img: bubblesImg,
-        x: 600,
+        x: 500,
         y: canvas.height + 400
     },
 
@@ -201,9 +201,9 @@ function animate() {
     drawJelly();
     drawSmallBubbles();
     //START SCORE
-    if(score === 150 || gameOver) {
+    if(score === 10 || gameOver) {
         cancelAnimationFrame(animationId);
-        loadWinningScreen();
+        // loadWinningScreen();
     }
     //CLOSE SCORE
     else {
@@ -267,7 +267,7 @@ window.addEventListener("load", () => {
         
             {
                 img: bubblesImg,
-                x: 600,
+                x: 400,
                 y: canvas.height + 400
             },
         
