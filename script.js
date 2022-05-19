@@ -6,6 +6,9 @@ const gameBoard = document.querySelector('#game-board');
 const reStartButton = document.querySelector('#gameOverButton');
 const gameOversScreen = document.querySelector('#game-over');
 
+let bubbleSound = new Audio('./audio/Plop.ogg'); 
+bubbleSound.volume = 0.9;
+
 //DISPLAY WINNING SCREEN
 const gameWinningScreen = new Image();
 gameWinningScreen.src = "./images/winner.jpg";
@@ -191,19 +194,27 @@ function loadWinningScreen() {
 function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBg();
-    //SCORE TEXT
-    ctx.font = '24px Verdana';
-    ctx.fillText (`Your Score is: ${score}`, 30, 30);
-    ctx.fillStyle = 'white';
-    //ENDS SCORE TEXT
     drawFish();
     drawBubbles();
     drawJelly();
     drawSmallBubbles();
+    //SCORE TEXT
+    ctx.font = '24px Verdana';
+    ctx.fillText (`Your Score is: ${score}`, 30, 40);
+    ctx.fillStyle = 'white';
+    //ENDS SCORE TEXT
+
     //START SCORE
     if(score === 10 || gameOver) {
         cancelAnimationFrame(animationId);
+        gameBoard.style.display = 'none';
+        gameOversScreen.style.display = 'block';
+        startScreen.style.display = 'none';
         // loadWinningScreen();
+        score = 0;
+        gameOver = false;
+        document.getElementById('gameOverButton').onclick = () => {
+        startGame()};
     }
     //CLOSE SCORE
     else {
@@ -217,6 +228,8 @@ function startGame() {
     startScreen.style.display = 'none';
     gameBoard.style.display = 'block';
     gameOversScreen.style.display = 'none';
+    canvas.classList.remove('visibility');
+    // body.(gameWinningScreen);
     animate();
 }
 
@@ -301,6 +314,7 @@ function drawBubbles() {
                     playerHeight + playerY > bubblesArray[i].y) {
                         bubblesArray[i].y = canvas.height + 200;
                         score += 1;
+                        bubbleSound.play();
                         console.log(score);
                     } 
     }
@@ -311,7 +325,7 @@ function drawBubbles() {
 function drawJelly() {
     for (let i = 0; i < jellyArray.length; i += 1) {
         ctx.drawImage(jellyArray[i].img, jellyArray[i].x, jellyArray[i].y, 120, 120)
-        jellyArray[i].y -= 2;
+        jellyArray[i].y -= 1.5;
         if(jellyArray[i].y < 0) {
             jellyArray[i].y = canvas.height + 300;
         }
@@ -325,7 +339,7 @@ function drawJelly() {
                     gameOversScreen.style.display = 'block';
                     startScreen.style.display = 'none';
                     console.log('collision')
-                    gameOver = true;
+                    gameOver = false;
                 }                
     }
 }
@@ -342,3 +356,26 @@ function drawSmallBubbles() {
     }
 }
 
+
+
+// let myGamePiece;
+// let myObstacles = [];
+// let mySound;
+
+// function startGame() {
+//     myGamePiece = new component(30, 30, "red", 10, 120);
+//     mySound = new sound("./audio/Plop.ogg");
+//     myGameArea.start();
+// }
+
+// function updateGameArea() {
+//     // let X, height, gap, minHeight, maxHeight, minGap, maxGap;
+//     for (i = 0; i < myObstacles.length; i += 1) {
+//     if (myGamePiece.crashWith(myObstacles[i])) {
+//     mySound.play();
+//     myGameArea.stop();
+//     return;
+//     }
+// }
+
+// }
