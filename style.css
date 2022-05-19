@@ -44,12 +44,12 @@ body button {
 }
 
 
-.main-screen {
-    background-image: url(./images/fish.gif);
+/* .main-screen {
+    image: url(./images/fish.gif);
     background-repeat: no-repeat;
     margin-right: 100px;
     background-color: rgb(85, 60, 60);
-}
+} */
 
 /* 
 #btn-start {
