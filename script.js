@@ -6,6 +6,7 @@ const gameBoard = document.querySelector('#game-board');
 const reStartButton = document.querySelector('#gameOverButton');
 const gameOversScreen = document.querySelector('#game-over');
 
+//AUDIO
 let bubbleSound = new Audio('./audio/Plop.ogg'); 
 bubbleSound.volume = 0.9;
 
